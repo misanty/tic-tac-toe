@@ -13,46 +13,18 @@ def printBoard():
 #print (theBoard['top-L'])
 #length = len(theBoard)
 
-def checkTheGame():
-    while True:
-        if((theBoard['top-L'] == theBoard['mid-M'] == theBoard['low-R'])and (theBoard['top-L'] != ' ' or theBoard['mid-M'] != ' ' or theBoard['low-R'] != ' ')):
-            print(theBoard['top-L'] +' wins')
-            return True
-            break
-        elif(theBoard['top-L'] == theBoard['top-M'] == theBoard['top-R']) and (theBoard['top-L'] != ' ' or theBoard['top-M'] != ' ' or theBoard['top-R'] != ' '):
-            print(theBoard['top-L'] +' wins')
-            return True
-            break
-        elif(theBoard['top-L'] == theBoard['mid-L'] == theBoard['low-L']) and (theBoard['top-L'] != ' ' or theBoard['mid-L'] != ' ' or theBoard['low-L'] != ' '):
-            print(theBoard['top-L'] +' wins')
-            return True
-            break
-        elif(theBoard['low-L'] == theBoard['low-M'] == theBoard['low-R']) and (theBoard['low-L'] != ' ' or theBoard['low-M'] != ' ' or theBoard['low-R'] != ' '):
-            print(theBoard['low-L'] +' wins')
-            return True
-            break
-        elif(theBoard['mid-L'] == theBoard['mid-M'] == theBoard['mid-R']) and (theBoard['mid-L'] != ' ' or theBoard['mid-M'] != ' ' or theBoard['mid-R'] != ' '):
-            print(theBoard['mid-L'] +' wins')
-            return True
-            break
-        elif(theBoard['top-M'] == theBoard['mid-M'] == theBoard['low-M']) and (theBoard['top-M'] != ' ' or theBoard['mid-M'] != ' ' or theBoard['low-M'] != ' '):
-            print(theBoard['top-M'] +' wins')
-            return True
-            break
-        elif(theBoard['top-R'] == theBoard['mid-R'] == theBoard['low-R']) and (theBoard['top-R'] != ' ' or theBoard['mid-R'] != ' ' or theBoard['low-R'] != ' '):
-            print(theBoard['top-R'] +' wins')
-            return True
-        elif(theBoard['top-R'] == theBoard['mid-M'] == theBoard['low-L']) and (theBoard['top-R'] != ' ' or theBoard['mid-M'] != ' ' or theBoard['low-L'] != ' '):
-            print(theBoard['top-R'] +' wins')
-            return True
-            break
-        elif ' ' not in theBoard:
-            break
-        else:
-           
-            print('Tie!')
-            break
-       
+
+def checkTheGame(board):
+    if ((board['top-L'] == board['mid-M'] == board['low-R'] != ' ') or
+        (board['top-R'] == board['mid-M'] == board['low-L'] != ' ')):
+        return True, board['mid-M']
+    for i in range(3):
+        if ((board[f'top-{i}'] == board[f'mid-{i}'] == board[f'low-{i}'] != ' ') or
+            (board[f'{i}-L'] == board[f'{i}-M'] == board[f'{i}-R'] != ' ')):
+            return True, board[f'{i}-{i}']
+    if ' ' not in board.values():
+        return True, None
+    return False, None
 
 #checkTheGame()
 printBoard()
